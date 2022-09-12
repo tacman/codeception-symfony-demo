@@ -7,6 +7,10 @@
 actor: AcceptanceTester
 modules:
     enabled:
+        - Symfony:
+              part: services
+              app_path: 'src'
+              environment: 'dev'
         - PhpBrowser:
             url: http://localhost:8000
         - \App\Tests\Helper\Acceptance

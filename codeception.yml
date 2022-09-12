@@ -9,5 +9,8 @@ actor_suffix: Tester
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+        - App\EventSubscriber\LoggerSubscriber: # enabled extension
+              max_files: 5 # logger configuration
+
 params:
     - .env
