@@ -1,10 +1,9 @@
-Symfony Demo Application
+Codeception Symfony Demo
 ========================
 
-The "Symfony Demo Application" is a reference application created to show how
-to develop applications following the [Symfony Best Practices][1].
+This is the Symfony Demo with Codeception installed and some simple cepts.
 
-You can also learn about these practices in [the official Symfony Book][5].
+It fails when getting the Symfony module from an event subscriber, so there is either a bug in Codeception or (more likely) an error in the configuration.
 
 Requirements
 ------------
@@ -16,55 +15,43 @@ Requirements
 Installation
 ------------
 
-[Download Symfony][4] to install the `symfony` binary on your computer and run
-this command:
-
 ```bash
-$ symfony new --demo my_project
+git clone https://github.com/tacman/codeception-symfony-demo  && cd codeception-symfony-demo
+composer install
+symfony server:start -d
+vendor/bin/codecept run -v
 ```
 
-Alternatively, you can use Composer:
+Result
+------
 
-```bash
-$ composer create-project symfony/symfony-demo my_project
+```
+vendor/bin/codecept run -v
+Codeception PHP Testing Framework v5.0.2 https://helpukrainewin.org
+
+App\Tests.acceptance Tests (3) --------------------------------------------------------------------------------------------------------------------------------------------
+Modules: Symfony, PhpBrowser, \App\Tests\Helper\Acceptance
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+✔ BlogCept: Open blog page and see article there (0.26s)
+✔ LoginCept: Login as admin to backend (0.39s)
+✔ FirstCest: Try to test (0.00s)
+
+In Extension.php line 123:
+                                                  
+  [Codeception\Exception\ModuleRequireException]  
+  [Symfony] module requirements not met --        
+                                                  
+  module is not enabled                           
+                                                  
+
+Exception trace:
+  at /home/tac/survos/play/codeception-symfony-demo/vendor/codeception/codeception/src/Codeception/Extension.php:123
+ Codeception\Extension->getModule() at /home/tac/survos/play/codeception-symfony-demo/src/EventSubscriber/LoggerSubscriber.php:36
+ App\EventSubscriber\LoggerSubscriber->afterSuite() at /home/tac/survos/play/codeception-symfony-demo/vendor/symfony/event-dispatcher/EventDispatcher.php:230
+ Symfony\Component\EventDispatcher\EventDispatcher->callListeners() at /home/tac/survos/play/codeception-symfony-demo/vendor/symfony/event-dispatcher/EventDispatcher.php:59
+ Symfony\Component\EventDispatcher\EventDispatcher->dispatch() at /home/tac/survos/play/codeception-symfony-demo/vendor/codeception/codeception/src/Codeception/SuiteManager.php:150
 ```
 
-If you want to test the demo without installing anything locally, you can also
-deploy it on Platform.sh, the official Symfony PaaS:
+Configuration
+-------------
 
-<p align="center">
-<a href="https://console.platform.sh/projects/create-project?template=https://raw.githubusercontent.com/symfonycorp/platformsh-symfony-template-metadata/main/template-metadata-demo.yaml&utm_content=symfonycorp&utm_source=github&utm_medium=button&utm_campaign=deploy_on_platform"><img src="https://platform.sh/images/deploy/lg-blue.svg" alt="Deploy on Platform.sh" width="180px" /></a>
-</p>
-
-Usage
------
-
-There's no need to configure anything to run the application. If you have
-[installed Symfony][4] binary, run this command:
-
-```bash
-$ cd my_project/
-$ symfony serve
-```
-
-Then access the application in your browser at the given URL (<https://localhost:8000> by default).
-
-If you don't have the Symfony binary installed, run `php -S localhost:8000 -t public/`
-to use the built-in PHP web server or [configure a web server][3] like Nginx or
-Apache to run the application.
-
-Tests
------
-
-Execute this command to run tests:
-
-```bash
-$ cd my_project/
-$ ./bin/phpunit
-```
-
-[1]: https://symfony.com/doc/current/best_practices.html
-[2]: https://symfony.com/doc/current/setup.html#technical-requirements
-[3]: https://symfony.com/doc/current/setup/web_server_configuration.html
-[4]: https://symfony.com/download
-[5]: https://symfony.com/book

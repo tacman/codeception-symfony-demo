@@ -1,3 +1,5 @@
+# codeception.yml
+
 namespace: App\Tests
 paths:
     tests: tests
