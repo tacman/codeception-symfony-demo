@@ -34,8 +34,10 @@ services:
     App\EventSubscriber\CommentNotificationSubscriber:
         $sender: '%app.notifications.email_sender%'
 
-#    Twig\Environment:
-#        public: true
+    twig:
+        public: true
+        alias: Twig\Environment
+
 when@test:
     services:
         test.user_password_hasher:
